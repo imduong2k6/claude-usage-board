@@ -336,6 +336,25 @@ export const register: Register = on => {
       }
     })()
 
+    // The typeface is not shipped: when this computer has none yet, cut it from the copy the Claude app caches.
+    void (async () => {
+      const font = `${$.plugin.root}/${FONT_FILE}`
+      try {
+        if (await $.fs.stat(font).then(() => true, () => false)) return
+        for (const python of ['python', 'python3']) {
+          const ran = await $.process.run([python, '-I', `${$.plugin.root}/scripts/build_font.py`, font], { timeoutMs: 120_000 }).catch(() => undefined)
+          if (ran?.exitCode === 0) {
+            fontData = undefined
+            $.ui.invalidate('ui.render')
+            return
+          }
+        }
+        $.ui.log('usage-board: no Anthropic Sans found to use; the board draws in the system font', { to: 'debug' })
+      } catch (err) {
+        $.ui.log(`usage-board: font setup skipped: ${String(err)}`, { to: 'debug' })
+      }
+    })()
+
     return started
   })
 
