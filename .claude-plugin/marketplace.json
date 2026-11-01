@@ -1,0 +1,1 @@
+{"name":"claude-usage-board","owner":{"name":"imduong2k6"},"plugins":[{"name":"usage-board","source":"./","description":"A recreation of the old Claude Code /stats board that draws in each new chat"}]}

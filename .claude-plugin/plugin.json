@@ -1,0 +1,11 @@
+﻿{
+    "name":  "usage-board",
+    "version":  "0.2.0",
+    "description":  "A usage board (sessions, messages, tokens, activity heatmap, models) that opens in each new chat",
+    "types":  "./types/index.d.ts",
+    "author":  {
+                   "name":  "imduong2k6"
+               },
+    "license":  "MIT",
+    "repository":  "https://github.com/imduong2k6/claude-usage-board"
+}
